@@ -2,10 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>FORUM!</title>
+    <title>Grade = Exceeds Expectations</title>
 </head>
 <body>
-
 {{#names}}
 <a href="/person?id={{id}}">
     {{firstName}}
@@ -20,16 +19,16 @@
 <a href="/?offset={{.}}">Next</a>
 {{/next}}
 
+
 {{#nameDetail}}
 
-{{firstName}}
-{{lastName}}
-{{email}}
-{{country}}
+Name: {{firstName}}
+{{lastName}}<br> Email:
+{{email}}<br> Country:
+{{country}}<br> IP-Address:
 {{ipAddress}}
 
 {{/nameDetail}}
-
 
 </body>
 </html>

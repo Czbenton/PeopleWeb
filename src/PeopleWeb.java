@@ -15,7 +15,6 @@ public class PeopleWeb {
         File f = new File("people.csv");
         Scanner fileScanner = new Scanner(f);
 
-
         String line;
         while (fileScanner.hasNext()) {
             line = fileScanner.nextLine();
@@ -38,27 +37,21 @@ public class PeopleWeb {
                     if (offset != null) {
                         offsetNum = Integer.parseInt(offset);
                     }
-
                     for (int i = offsetNum; i < offsetNum + 20; i++) {
                         peopleList20.add(peopleList.get(i));
                     }
-
                     if (offsetNum >= 20) {
                         previous = offsetNum - 20;
                     }
-
                     if (offsetNum < peopleList.size() - 20) {
                         next = offsetNum + 20;
                     }
-
-
                     m.put("names", peopleList20);
                     m.put("previous", previous);
                     m.put("next", next);
                     return new ModelAndView(m, "people.html");
                 }),
                 new MustacheTemplateEngine()
-
         );
         Spark.get(
                 "/person",
@@ -71,13 +64,5 @@ public class PeopleWeb {
                 }),
                 new MustacheTemplateEngine()
         );
-
-
     }
-
-    public static void addTestNames() {
-
-    }
-
 }
-

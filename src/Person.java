@@ -9,10 +9,6 @@ public class Person {
     String country;
     String ipAddress;
 
-    public Person(int id) {
-        this.id = id;
-    }
-
     public Person(int id, String firstName, String lastName, String email, String country, String ipAddress) {
         this.id = id;
         this.firstName = firstName;
