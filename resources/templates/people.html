@@ -12,6 +12,14 @@
     {{lastName}}<br></a>
 {{/names}}
 
+{{#previous}}
+<a href="/?offset={{.}}">Previous</a>
+{{/previous}}
+
+{{#next}}
+<a href="/?offset={{.}}">Next</a>
+{{/next}}
+
 {{#nameDetail}}
 
 {{firstName}}

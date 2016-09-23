@@ -1,5 +1,4 @@
 import spark.ModelAndView;
-import spark.Session;
 import spark.Spark;
 import spark.template.mustache.MustacheTemplateEngine;
 
@@ -29,13 +28,33 @@ public class PeopleWeb {
         }
         Spark.get("/",
                 ((request, response) -> {
-                    String offset = request.queryParams("offset");
+                    ArrayList<Person> peopleList20 = new ArrayList<>();
                     HashMap m = new HashMap();
+                    String offset = request.queryParams("offset");
+                    int offsetNum = 0;
+                    Integer previous = null;
+                    Integer next = null;
 
-                    Session session = request.session();
-                    String firstName = session.attribute("?????");
+                    if (offset != null) {
+                        offsetNum = Integer.parseInt(offset);
+                    }
 
-                    m.put("names", peopleList);
+                    for (int i = offsetNum; i < offsetNum + 20; i++) {
+                        peopleList20.add(peopleList.get(i));
+                    }
+
+                    if (offsetNum >= 20) {
+                        previous = offsetNum - 20;
+                    }
+
+                    if (offsetNum < peopleList.size() - 20) {
+                        next = offsetNum + 20;
+                    }
+
+
+                    m.put("names", peopleList20);
+                    m.put("previous", previous);
+                    m.put("next", next);
                     return new ModelAndView(m, "people.html");
                 }),
                 new MustacheTemplateEngine()
@@ -44,10 +63,10 @@ public class PeopleWeb {
         Spark.get(
                 "/person",
                 ((request, response) -> {
+                    String id = request.queryParams("id");
                     HashMap m = new HashMap();
-                    Integer id = peopleList.get(0); //TODO this is close!
-                    Person p = new Person(id);
-                    m.put("nameDetail", p);
+
+                    m.put("nameDetail", peopleList.get(Integer.parseInt(id) - 1));
                     return new ModelAndView(m, "people.html");
                 }),
                 new MustacheTemplateEngine()
